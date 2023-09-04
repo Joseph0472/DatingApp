@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Authorize]
+[Authorize] // Higher level Authorize/Anonymous would overwrite lower's
 public class UsersController : BaseApiController
 {
     private readonly DataContext _context;
@@ -16,6 +16,7 @@ public class UsersController : BaseApiController
         _context = context;
     }
 
+    [AllowAnonymous]
     [HttpGet] // /api/users
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
